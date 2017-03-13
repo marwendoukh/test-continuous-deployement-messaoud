@@ -1,96 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>tn.esprit.sleam</groupId>
-	<artifactId>AdminWeb</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<properties>
+    <modelVersion>4.0.0</modelVersion>
 
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<version.javaee>7.0</version.javaee>
+    <parent>
+        <groupId>net.wasdev.maven.parent</groupId>
+        <artifactId>java7-parent</artifactId>
+        <version>1.4</version>
+        <relativePath></relativePath>
+    </parent>
 
-		<version.google.guava>18.0</version.google.guava>
+    <groupId>net.wasdev.wlp.sample</groupId>
+    <artifactId>JavaHelloWorldApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
-		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
-		<version.wildfly>9.0.1.Final</version.wildfly>
-		<version.hibernate>4.3.10.Final</version.hibernate>
-		<primefaces.version>5.3</primefaces.version>
+    <name>Liberty Profile Sample - Servlet</name>
+    <url>https://wasdev.github.io</url>
 
-		<version.compiler.plugin>3.1</version.compiler.plugin>
-		<version.ear.plugin>2.10</version.ear.plugin>
-		<version.war.plugin>2.5</version.war.plugin>
-		<version.ejb.plugin>2.4</version.ejb.plugin>
-		<version.surefire.plugin>2.16</version.surefire.plugin>
-		<version.archetype.plugin>2.2</version.archetype.plugin>
-
-	</properties>
-
-	<dependencyManagement>
-		<dependencies>
-
-			<dependency>
-				<groupId>tn.esprit.sleam</groupId>
-				<artifactId>AdminWeb-ejb</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<type>ejb</type>
-			</dependency>
-
-			<dependency>
-				<groupId>tn.esprit.sleam</groupId>
-				<artifactId>AdminWeb-web</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<type>war</type>
-			</dependency>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://raw.github.com/WASdev/sample.servlet/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
 
-			<dependency>
-				<groupId>javax</groupId>
-				<artifactId>javaee-api</artifactId>
-				<version>${version.javaee}</version>
-				<scope>provided</scope>
-			</dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-servlet_3.0_spec</artifactId>
+                <version>1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-			<dependency>
-				<groupId>org.primefaces</groupId>
-				<artifactId>primefaces</artifactId>
-				<version>${primefaces.version}</version>
-			</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
-		</dependencies>
-	</dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <warName>JavaHelloWorldApp</warName>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                    <artifactId>liberty-maven-plugin</artifactId>
+                    <version>1.2.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <configuration>
+                    <configFile>src/main/wlp/server.xml</configFile>
+                    <bootstrapProperties>
+                        <appLocation>../../../../../${project.build.finalName}</appLocation>
+                    </bootstrapProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-
-	<distributionManagement>
-		<repository>
-			<id>deployment</id>
-			<name>releases</name>
-			<url>http://git.esprit.tn:8081/nexus/content/repositories/releases/</url>
-		</repository>
-
-		<snapshotRepository>
-			<id>deployment</id>
-			<name>snapshots</name>
-			<url>http://git.esprit.tn:8081/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-archetype-plugin</artifactId>
-					<version>${version.archetype.plugin}</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-
-  <modules>
-    <module>AdminWeb-ejb</module>
-    <module>AdminWeb-web</module>
-    <module>AdminWeb-ear</module>
-  </modules>
 </project>
