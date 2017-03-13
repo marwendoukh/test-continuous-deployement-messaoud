@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:jsf="http://xmlns.jcp.org/jsf"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrought"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+  <meta charset="UTF-8"/>
+  <title>Day 001 Login Form</title>
+  
+  <h:outputStylesheet name="http://fonts.googleapis.com/css?family=Open+Sans:600'"> </h:outputStylesheet>
+<!--   <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'/> -->
+		<h:outputStylesheet library="css" name="style.css"> </h:outputStylesheet>
+<!--       <link rel="stylesheet" href="css/style.css"> -->
+
+  
+</h:head>
+
+<h:body>
+  <div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in"/><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"/><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+			<h:form>
+				<div class="group">
+<!-- 					<label for="user" class="label">Username</label> -->
+<!-- 					<input id="user" type="text" class="input"/> -->
+					
+					<h:outputText value="login"  />
+					<h:inputText value="#{loginBean.login}" styleClass="input"/>
+					
+				</div>
+				<div class="group">
+<!-- 					<label for="pass" class="label">Password</label> -->
+<!-- 					<input id="pass" type="password" class="input" data-type="password"/> -->
+					<h:outputText value="password" />
+					<h:inputSecret value="#{loginBean.password}" styleClass="input"/>
+				</div>
+				<div class="group">
+					<input id="check" type="checkbox" class="check"/>
+					<label for="check"><span class="icon"></span> Keep me Signed in</label>
+				</div>
+				<div class="group">
+<!-- 					<input type="submit" class="button" value="Sign In"/>  -->
+					<h:commandButton action="#{loginBean.doLogin()}" value="Login" styleClass="button" />
+					
+				</div>
+				
+				</h:form>
+
+<!-- <h:outputText value="login"  /> -->
+<!-- <h:inputText value="#{loginBean.login}" styleClass="input" /> -->
+<!-- <h:outputText value="password" /> -->
+<!-- <h:inputSecret value="#{loginBean.password} " styleClass="input" /> -->
+<!-- <h:commandButton action="#{loginBean.doLogin()}" value="Login" styleClass="button" /> -->
+
+
+				
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<a href="#forgot">Forgot Password?</a>
+				</div>
+			</div>
+			<h:form>
+			<div class="sign-up-htm">
+				<div class="group">
+<!-- 					<label for="user" class="label">CIN</label> -->
+<!-- 					<input id="user" type="text" class="input"/> -->
+					<h:outputText value="CIN"  />
+					<h:inputText value="#{ajoutAdmin.cin}" styleClass="input"/>
+				</div>
+				<div class="group">
+<!-- 					<label for="pass" class="label">Username</label> -->
+<!-- 					<input id="pass" type="password" class="input" /> -->
+					<h:outputText value="Username"  />
+					<h:inputText value="#{ajoutAdmin.login}" styleClass="input"/>
+				</div>
+				<div class="group">
+<!-- 					<label for="pass" class="label">Name</label> -->
+<!-- 					<input id="pass" type="password" class="input" data-type="password"/> -->
+					<h:outputText value="Name"  />
+					<h:inputText value="#{ajoutAdmin.nom}" styleClass="input"/>
+				</div>
+				<div class="group">
+<!-- 					<label for="pass" class="label">Password</label> -->
+<!-- 					<input id="pass" type="text" class="input"/> -->
+					<h:outputText value="Password"  />
+					<h:inputText value="#{ajoutAdmin.password}" styleClass="input"/>
+				</div>
+				<div class="group">
+<!-- 					<input type="submit" class="button" value="Sign Up"/> -->
+					<h:commandButton action="#{ajoutAdmin.AjouterAdmin()}" value="Sign Up" styleClass="button" />
+				</div>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<label for="tab-1">Already Member?</label>
+				</div>
+			</div>
+			</h:form>
+		</div>
+	</div>
+</div>
+  
+  
+</h:body>
+</html>
